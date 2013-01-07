@@ -28,11 +28,11 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 
 " /* Customize */
-
 set number
 set shiftwidth=4
 set softtabstop=4
 "set textwidth=80
+set columns=80
 set tabstop=4
 
 colorscheme desert
@@ -41,15 +41,31 @@ colorscheme desert
 " /* Taglist */
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
+let g:winManagerWindowLayout='FileExplorer|TagList'
+let g:winManagerWidth=35
 "let g:ShowOutputWindowWhenVimLaunched=1
-nnoremap <silent> <F8> :TlistToggle<CR>
+nnoremap <silent> <F8> :WMToggle<CR>
+"nnoremap <silent> <F8> :TlistToggle<CR>
 "nnoremap <silent> <C-s> :vsplit<CR>
 " /* Taglist */
+
+" /* QuickFix */
+nnoremap <silent> <F9> :cw<CR>
+nnoremap <silent> <F10> :cp<CR>
+nnoremap <silent> <F11> :cn<CR>
+
+" /* MiniBufExplorer */
+" let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplMapWindowNavArrows = 1 
+
+" /* Grep */
+nnoremap <silent> <F3> :Rgrep<CR> 
 
 set completeopt=longest,menu
 
 " /* pydiction 1.2 python auto-complete */
-"filetype plugin indent on
+filetype plugin indent on
 let g:pydiction_location = '~/.vim/tools/pydiction/complete-dict'
 " /* pydiction 1.2 python auto-complete */
 
@@ -75,6 +91,9 @@ endif
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
+  
+  highlight OverLength ctermbg=darkgrey guibg=#592929
+  match OverLength /\%>80v.\+/
 endif
 
 " Only do this part when compiled with support for autocommands.
